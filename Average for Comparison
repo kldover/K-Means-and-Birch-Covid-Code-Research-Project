@@ -1,0 +1,15 @@
+import pandas as pd
+data=pd.read_csv('owid-covid-data.csv.zip')
+  data=data[['reproduction_rate','female_smokers','male_smokers']]
+  mean=data.mean(axis=0,skipna=True)
+  data2=data['female_smokers']
+  mean2=data2.mean(axis=0,skipna=True)
+  mean3=mean2-mean
+  data3=data['male_smokers']
+  mean4=data3.mean(axis=0,skipna=True)
+  mean5=mean4-mean
+  mean6=(mean4+mean3-mean)
+print(mean)
+print(mean3)
+print(mean5)
+print(mean6)
