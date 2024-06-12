@@ -1,0 +1,51 @@
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import math
+import matplotlib.pyplot as plt
+from matplotlib.colors import ListedColormap
+
+data = pd.read_csv('owid-covid-data.csv.zip')
+
+# KMeans will start here
+def initiate_centroids(k, data):
+    centroids = data.sample(k)
+    return centroids
+
+np.random.seed(1600)
+k = 3
+data = data[['reproduction_rate', 'female_smokers', 'male_smokers']]
+centroids = initiate_centroids(k, data)
+centroids
+data2 = data.copy()
+data2.reproduction_rate = pd.to_numeric(data2['reproduction_rate'])
+data2.groupby('reproduction_rate').sum()
+customMap = ListedColormap(['crimson'])
+fig, ax = plt.subplots(figsize=(20, 20))
+
+plt.subplot(2, 3, 1)
+x1 = data2['reproduction_rate']
+y1 = data2['female_smokers']
+plt.scatter(x1, y1, c='red')
+ax.set_xlabel('Reproduction', fontsize=14)
+ax.set_ylabel('Female Smokers', fontsize=14)
+
+plt.subplot(2, 3, 2)
+x2 = data2['reproduction_rate']
+y2 = data2['male_smokers']
+plt.scatter(x2, y2, c='gold')
+ax.set_xlabel('Reproduction', fontsize=14)
+ax.set_ylabel('Male Smokers', fontsize=14)
+plt.scatter(x2,y2, c='gold')
+plt.xticks(fontsize=12)
+plt.yticks(fontsize=12)
+plt.show
+plt.subplot(2,3,4)
+x1=data2['reproduction_rate']
+y1=data2['female_smokers']
+x2=data2['reproduction_rate]
+y2=data2['male_smokers']
+plt.scatter(x1,y1, c='red')
+plt.scatter(x2,y2, c= 'gold')
+plt.show()
+#kmeans is done
